@@ -1,0 +1,23 @@
+# Paragraph Finder
+
+Paragraph Finder is a tool that searches an index of paragraphs for you.
+
+## About
+
+In 2024, I started [Wings of Fire Wiki](https://wingsoffire.wiki), an online encyclopedia documenting the children's novel series *Wings of Fire* by Tui T. Sutherland. To help verify the accuracy of wiki content, our citations are classified by book, chapter, and paragraph number. This is more reliable than page numbers, which may differ by edition.
+
+Unfortunately, counting paragraph numbers is terrible. It is easy to make mistakes, long chapters take a long time to count, and there may be some confusion on certain types of formatting like poems.
+
+To solve these problems, I created Paragraph Finder. Paragraph Finder takes a book title, chapter title, and paragraph quote, and gives you the number of the paragraph. It references JSON index files containing each paragraph as a string as part of a list that is labled with the chapter title. It even has fuzzy paragraph search, so you don't need to type the paragraph perfectly with the fancy punctuation.
+
+You cannot yet but will eventually be able to find the Wings of Fire paragraph counter web GUI at <https://wingsoffire.wiki/paragraphs>.
+
+## Use
+
+There are two ways you can use Paragraph Finder. There is a CLI version and a web version.
+
+**Paragraph Finder CLI.py** is a command-line utility that uses index files on the local machine. This is the easiest way to get started.
+
+**Paragraph Finder Web** is a backend for the web UI, which you cannot yet but eventually will be able to find at [BogTheMudWing/Paragraph-Finder-WebUI](https://github.com/BogTheMudWing/Paragraph-Finder-WebUI). The web version needs a separate backend because bundling the entire application in the browser would require distributing the entire contents of the book as well, which is illegal for works protected under copyright.
+
+Whichever you use, you'll need some index files for the books you want. The easiest way is to convert a PDF of the book into JSON. You cannot yet but will eventually be able to find a script that does most of the conversion for you at [BogTheMudWing/PDF-To-Paragraphs](https://github.com/BogTheMudWing/PDF-To-Paragraphs). PDFs are not designed to be computer-friendly, so the paragraphs are detected by indent. It's not perfect and it won't work for every PDF, but it gets most of the work done and you only need to clean it up rather than copy and paste the whole thing. If you *don't* have a PDF... you might be better off asking a friend who does or not going this route at all, depending on the length of the book and your patience.
