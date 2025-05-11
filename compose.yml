@@ -1,0 +1,10 @@
+name: paragraph-finder
+services:
+    paragraph-finder:
+        ports:
+            - 5000:5000
+        container_name: paragraph-finder
+        volumes:
+            - ./books:/app/books/
+        restart: always
+        image: paragraph-finder
