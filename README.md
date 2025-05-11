@@ -16,8 +16,22 @@ You cannot yet but will eventually be able to find the Wings of Fire paragraph c
 
 There are two ways you can use Paragraph Finder. There is a CLI version and a web version.
 
-**Paragraph Finder CLI.py** is a command-line utility that uses index files on the local machine. This is the easiest way to get started.
+**paragraph-finder-cli.py** is a command-line utility that uses index files on the local machine. This is the easiest way to get started.
 
-**Paragraph Finder Web** is a backend for the web UI, which you can find at [BogTheMudWing/Paragraph-Finder-WebUI](https://github.com/BogTheMudWing/Paragraph-Finder-WebUI). The web version needs a separate backend because bundling the entire application in the browser would require distributing the entire contents of the book as well, which is illegal for works protected under copyright.
+**paragraph-finder-web.py** is a backend for the web UI, which you can find at [BogTheMudWing/Paragraph-Finder-WebUI](https://github.com/BogTheMudWing/Paragraph-Finder-WebUI). The web version needs a separate backend because bundling the entire application in the browser would require distributing the entire contents of the book as well, which is illegal for works protected under copyright. The easiest way to deploy this in production is to set up a Docker container.
+
+Build the container:
+
+```bash
+docker build -t paragraph-finder .
+```
+
+Create and start the container:
+
+```bash
+docker run -p 5000:5000 --name paragraph-finder -v ./books:/app/books/ --restart always -d paragraph-finder
+```
+
+You can reach it on port 5000. Index files can be placed in the books folder.
 
 Whichever you use, you'll need some index files for the books you want. The easiest way is to convert a PDF of the book into JSON. You can find a script that does most of the conversion for you at [BogTheMudWing/PDF-To-Paragraphs](https://github.com/BogTheMudWing/PDF-To-Paragraphs). PDFs are not designed to be computer-friendly, so the paragraphs are detected by indent. It's not perfect and it won't work for every PDF, but it gets most of the work done and you only need to clean it up rather than copy and paste the whole thing. If you *don't* have a PDF... you might be better off asking a friend who does or not going this route at all, depending on the length of the book and your patience.

@@ -1,8 +1,5 @@
 import json
 import difflib
-from flask import Flask, request, jsonify
-
-app = Flask(__name__)
 
 def load_book(filepath):
     with open(filepath, 'r', encoding='utf-8') as file:
@@ -45,36 +42,37 @@ def find_paragraph_index(book, chapter_key, target_paragraph, threshold=0.8):
 
     return None, None, None
 
-@app.route('/find_paragraph', methods=['POST'])
-def find_paragraph():
-    data = request.get_json()
-    book_name = data.get('book_name')
-    chapter_key = data.get('chapter')
-    paragraph = data.get('paragraph')
+def main():
+    book_name = input("Enter path of the JSON file")
+    book = load_book(book_name)
 
-    if not book_name or not chapter_key or not paragraph:
-        return jsonify({"reason": "Missing required parameters (book_name, chapter, paragraph)"}), 400
+    chapter_key = input("Enter the chapter: ")
+    print("Enter the paragraph to search for (end with two blank lines):")
 
-    try:
-        book = load_book(f"{book_name}.json")  # assuming book name corresponds to JSON file
-    except FileNotFoundError:
-        return jsonify({"reason": "Book not found. Did you type it correctly? Check the wiki."}), 404
+    lines = []
+    while True:
+        try:
+            line = input()
+        except EOFError:
+            break
+        if line == "":
+            break
+        lines.append(line)
 
-    try:
-        index, match, score = find_paragraph_index(book, chapter_key, paragraph)
-    except TypeError:
-        return jsonify({"reason": "Chapter not found. Did you type it correctly? It should be a lowercase name like \"epilogue\" (without quotes) or a number."})
+    paragraph = normalize_text(' '.join(lines))
+
+    index, match, score = find_paragraph_index(book, chapter_key, paragraph)
 
     if index:
-        response = {
-            "index": index,
-            "similarity_score": round(score, 2),
-            "match": match
-        }
-        return jsonify(response)
+        if score == 1.0:
+            print(f"Exact match found at index {index} in chapter '{chapter_key}'.")
+        else:
+            print(f"Approximate match found at index {index} in chapter '{chapter_key}'.")
+            print(f"Similarity score: {score:.2f}")
+            print("Closest paragraph:")
+            print(match)
     else:
-        return jsonify({"reason": "No close match found. Make sure you have entered the entire paragraph and that the book and chapter are correct."}), 404
-
+        print("No close match found.")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    main()
