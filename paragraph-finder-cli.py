@@ -43,7 +43,7 @@ def find_paragraph_index(book, chapter_key, target_paragraph, threshold=0.8):
     return None, None, None
 
 def main():
-    book_name = input("Enter path of the JSON file")
+    book_name = input("Enter path of the JSON file: ")
     book = load_book(book_name)
 
     chapter_key = input("Enter the chapter: ")

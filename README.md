@@ -18,6 +18,20 @@ There are two ways you can use Paragraph Finder. There is a CLI version and a we
 
 **paragraph-finder-cli.py** is a command-line utility that uses index files on the local machine. This is the easiest way to get started.
 
+Example:
+
+```
+Enter path of the JSON file: The Dragonet Prophecy.json
+Enter the chapter: 1
+Enter the paragraph to search for (end with two blank lines):
+"Well, first we save the world," Tsunami said. "And then we go home."
+
+Approximate match found at index 64 in chapter '1'.
+Similarity score: 0.94
+Closest paragraph:
+“Well, first we save the world,” Tsunami said. “And then we go home.”
+```
+
 **paragraph-finder-web.py** is a backend for the web UI, which you can find at [BogTheMudWing/Paragraph-Finder-WebUI](https://github.com/BogTheMudWing/Paragraph-Finder-WebUI). The web version needs a separate backend because bundling the entire application in the browser would require distributing the entire contents of the book as well, which is illegal for works protected under copyright. The easiest way to deploy this in production is to set up a Docker container.
 
 Build the container:
@@ -33,5 +47,7 @@ docker run -p 5000:5000 --name paragraph-finder -v ./books:/app/books/ --restart
 ```
 
 You can reach it on port 5000. Index files can be placed in the books folder.
+
+---
 
 Whichever you use, you'll need some index files for the books you want. The easiest way is to convert a PDF of the book into JSON. You can find a script that does most of the conversion for you at [BogTheMudWing/PDF-To-Paragraphs](https://github.com/BogTheMudWing/PDF-To-Paragraphs). PDFs are not designed to be computer-friendly, so the paragraphs are detected by indent. It's not perfect and it won't work for every PDF, but it gets most of the work done and you only need to clean it up rather than copy and paste the whole thing. If you *don't* have a PDF... you might be better off asking a friend who does or not going this route at all, depending on the length of the book and your patience.
