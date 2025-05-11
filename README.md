@@ -10,7 +10,7 @@ Unfortunately, counting paragraph numbers is terrible. It is easy to make mistak
 
 To solve these problems, I created Paragraph Finder. Paragraph Finder takes a book title, chapter title, and paragraph quote, and gives you the number of the paragraph. It references JSON index files containing each paragraph as a string as part of a list that is labled with the chapter title. It even has fuzzy paragraph search, so you don't need to type the paragraph perfectly with the fancy punctuation.
 
-You cannot yet but will eventually be able to find the Wings of Fire paragraph counter web GUI at <https://wingsoffire.wiki/paragraphs>.
+You can find the Wings of Fire paragraph counter web GUI at <https://wingsoffire.wiki/paragraphs>.
 
 ## Use
 
