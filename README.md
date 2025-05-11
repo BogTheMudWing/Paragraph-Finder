@@ -46,6 +46,12 @@ Create and start the container:
 docker run -p 5000:5000 --name paragraph-finder -v ./books:/app/books/ --restart always -d paragraph-finder
 ```
 
+Alternatively, you can use the included Docker Compose file:
+
+```bash
+docker compose up -d
+```
+
 You can reach it on port 5000. Index files can be placed in the books folder.
 
 ---
