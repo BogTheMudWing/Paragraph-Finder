@@ -1,6 +1,7 @@
 import json
 import difflib
 from flask import Flask, request, jsonify
+import os
 
 app = Flask(__name__)
 
@@ -12,7 +13,7 @@ def normalize_text(text):
     return ' '.join(text.split())
 
 def find_paragraph_index(book, chapter_key, target_paragraph, threshold=0.8):
-    chapter = book.get(chapter_key)
+    chapter = book.get("chapters").get(chapter_key)
     if chapter is None:
         print(f"Chapter '{chapter_key}' not found.")
         return None
@@ -75,6 +76,30 @@ def find_paragraph():
     else:
         return jsonify({"reason": "No close match found. Make sure you have entered the entire paragraph and that the book and chapter are correct."}), 404
 
+@app.route('/books', methods=['GET'])
+def list_books():
+    books_directory = "books"
+    # List all JSON files (books)
+    books = [f.replace('.json', '') for f in os.listdir(books_directory) if f.endswith('.json')]
+    
+    if books:
+        return jsonify({"available_books": books})
+    else:
+        return jsonify({"reason": "No books available."}), 404
+
+@app.route('/books/<book_name>/chapters', methods=['GET'])
+def list_chapters(book_name):
+    try:
+        book = load_book(f"books/{book_name}.json")
+    except FileNotFoundError:
+        return jsonify({"reason": f"Book '{book_name}' not found."}), 404
+
+    chapters = list(book.get("chapters").keys())
+    
+    if chapters:
+        return jsonify({"available_chapters": chapters})
+    else:
+        return jsonify({"reason": f"No chapters found in the book '{book_name}'."}), 404
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)
