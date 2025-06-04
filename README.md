@@ -57,3 +57,24 @@ You can reach it on port 5000. Index files can be placed in the books folder.
 ---
 
 Whichever you use, you'll need some index files for the books you want. The easiest way is to convert a PDF of the book into JSON. You can find a script that does most of the conversion for you at [BogTheMudWing/PDF-To-Paragraphs](https://github.com/BogTheMudWing/PDF-To-Paragraphs). PDFs are not designed to be computer-friendly, so the paragraphs are detected by indent. It's not perfect and it won't work for every PDF, but it gets most of the work done and you only need to clean it up rather than copy and paste the whole thing. If you *don't* have a PDF... you might be better off asking a friend who does or not going this route at all, depending on the length of the book and your patience.
+
+Index files should not have spaces in their names and be formatted like so:
+
+```json
+{
+  "chapters": {
+    "chapter_name": [
+      "Paragraph 1",
+      "Paragraph 2",
+      "Paragraph 3",
+      "and so on..."
+    ],
+    "another_chapter": [
+      "More paragraphs"
+    ],
+    "and_so_on": [
+      "More paragraphs"
+    ]
+  }
+}
+```
