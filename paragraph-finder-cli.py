@@ -9,7 +9,7 @@ def normalize_text(text):
     return ' '.join(text.split())
 
 def find_paragraph_index(book, chapter_key, target_paragraph, threshold=0.8):
-    chapter = book.get(chapter_key)
+    chapter = book.get("chapters").get(chapter_key)
     if chapter is None:
         print(f"Chapter '{chapter_key}' not found.")
         return None
