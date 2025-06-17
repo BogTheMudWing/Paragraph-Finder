@@ -78,3 +78,7 @@ Index files should not have spaces in their names and be formatted like so:
   }
 }
 ```
+
+---
+
+[![BogTheMudWing](https://nextcloud.macver.org/apps/files_sharing/publicpreview/jyWLnm4i724mxXg?file=/&fileId=61792&x=3390&y=1906&a=true&etag=c43260166526abc326861afd5244df8e)](https://blog.macver.org/about-me)
